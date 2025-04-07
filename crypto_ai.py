@@ -7,7 +7,7 @@ from cipher_utils import encrypt_text, decrypt_text
 # Charger le modèle IA entraîné pour l'analyse des vulnérabilités
 MODEL_PATH = "crypto_analyzer.h5"
 if not os.path.exists(MODEL_PATH):
-    raise FileNotFoundError(f"❌ Le fichier {MODEL_PATH} est introuvable. Assurez-vous qu'il est généré par model_training.py.")
+    raise FileNotFoundError(f" Le fichier {MODEL_PATH} est introuvable. Assurez-vous qu'il est généré par model_training.py.")
 
 model = load_model(MODEL_PATH)
 
@@ -20,7 +20,7 @@ def analyze_ciphertext(ciphertext: str, key: str, algorithm: str) -> str:
     """
     # Vérifier si l'algorithme est déjà connu comme vulnérable
     if algorithm in VULNERABLE_ALGORITHMS:
-        return f"⚠️ {algorithm} est connu comme vulnérable - ❌ Non sécurisé !"
+        return f" {algorithm} est connu comme vulnérable -  Non sécurisé !"
     
     # Préparer les données pour le modèle IA
     input_data = np.array([[ciphertext, key, algorithm]])
@@ -30,9 +30,9 @@ def analyze_ciphertext(ciphertext: str, key: str, algorithm: str) -> str:
     is_vulnerable = prediction[0][0] > 0.5
     
     return (
-        f"⚠️ Chiffrement potentiellement vulnérable ({algorithm}) - ❌ Non sécurisé !"
+        f" Chiffrement potentiellement vulnérable ({algorithm}) -  Non sécurisé !"
         if is_vulnerable else 
-        f"✅ Chiffrement sécurisé ({algorithm}) - 🔒 Sécurisé."
+        f" Chiffrement sécurisé ({algorithm}) -  Sécurisé."
     )
 
 # Exemple d'utilisation
